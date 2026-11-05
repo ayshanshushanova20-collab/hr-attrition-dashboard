@@ -51,7 +51,7 @@ These patterns show association, not proven cause. They should be tested with fu
 
 ## Tools
 
-Power BI, DAX
+Oracle SQL, Power BI, DAX
 
 ## Files
 

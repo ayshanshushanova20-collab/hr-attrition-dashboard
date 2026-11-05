@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HR Attrition Analytics — Portfolio</title>
+<style>
+:root{
+  --bg:#f6f3fa;--surface:#ffffff;--text:#1f1730;--muted:#5d5470;--accent:#4b1a63;--accent-soft:#e9dff2;--border:#ddd3e8;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#150f1e;--surface:#211832;--text:#f1ecf8;--muted:#b3a8c6;--accent:#c79ae6;--accent-soft:#33244a;--border:#3a2c52;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#150f1e;--surface:#211832;--text:#f1ecf8;--muted:#b3a8c6;--accent:#c79ae6;--accent-soft:#33244a;--border:#3a2c52;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;line-height:1.6}
+main{max-width:920px;margin:0 auto;padding:32px 20px 64px}
+header.hero{padding:28px 0 8px}
+.eyebrow{color:var(--accent);font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}
+h1{font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.15;margin:.3em 0 .4em}
+.lead{color:var(--muted);font-size:1.1rem;max-width:680px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.tag{background:var(--accent-soft);color:var(--accent);padding:4px 12px;border-radius:999px;font-size:.85rem;font-weight:600}
+section{margin-top:44px}
+h2{font-size:1.4rem;margin:0 0 14px}
+h2::after{content:"";display:block;width:44px;height:3px;background:var(--accent);margin-top:8px;border-radius:2px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px}
+.kpi b{display:block;font-size:1.7rem;color:var(--accent)}
+.kpi span{color:var(--muted);font-size:.85rem}
+.shot{border:2px dashed var(--border);border-radius:12px;padding:48px 20px;text-align:center;color:var(--muted);background:var(--surface)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px}
+.card h3{margin:0 0 6px;font-size:1.05rem}
+.card p{margin:0;color:var(--muted)}
+.num{display:inline-block;background:var(--accent);color:var(--surface);width:26px;height:26px;border-radius:50%;text-align:center;line-height:26px;font-weight:700;font-size:.85rem;margin-right:8px}
+ul{padding-left:20px;margin:0}
+li{margin:6px 0}
+.note{background:var(--accent-soft);border-radius:12px;padding:16px 18px;color:var(--text)}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--border);color:var(--muted);font-size:.95rem}
+
+.lang{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;justify-content:flex-end;gap:6px;padding:10px 0;background:var(--bg)}
+.lang button{border:1px solid var(--border);background:var(--surface);color:var(--text);padding:6px 14px;border-radius:999px;font:inherit;font-weight:600;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--accent);color:var(--surface);border-color:var(--accent)}
+[data-l]{display:none}
+body[data-lang="en"] [data-l="en"],body[data-lang="az"] [data-l="az"]{display:block}
+
+.shots{display:grid;gap:16px}
+.shots figure{margin:0}
+.shots img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--border)}
+.shots figcaption{color:var(--muted);font-size:.85rem;margin-top:6px}
+</style>
+</head>
+<body data-lang="en">
+<main>
+<div class="lang"><button id="b-en" aria-pressed="true">EN</button><button id="b-az" aria-pressed="false">AZ</button></div>
+<div data-l="en">
+<header class="hero">
+  <div class="eyebrow">Power BI · HR Analytics · Case Study</div>
+  <h1>Why do employees leave? An HR Attrition Dashboard</h1>
+  <p class="lead">An interactive two-page Power BI report that shows where attrition is highest, who is most at risk, and what HR could do about it.</p>
+  <div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Data Cleaning</span><span class="tag">Data Storytelling</span></div>
+</header>
+
+<section>
+  <h2>At a glance</h2>
+  <div class="kpis">
+    <div class="kpi"><b>1,470</b><span>Employees analysed</span></div>
+    <div class="kpi"><b>237</b><span>Employees who left</span></div>
+    <div class="kpi"><b>16.12%</b><span>Overall attrition rate</span></div>
+    <div class="kpi"><b>2.9×</b><span>Higher attrition with overtime</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>The business question</h2>
+  <p>Losing employees is expensive: recruiting, onboarding and lost knowledge all add up. The goal of this project was to answer three questions for an HR team: <strong>Where is attrition concentrated? Which factors go together with leaving? Where should HR act first?</strong></p>
+</section>
+
+<section>
+  <h2>Dashboard preview</h2>
+  <div class="shots"><figure><img src="HR%20Attrition%20Executive%20page.jpg" alt="Page 1: Overview" loading="lazy"><figcaption>Page 1: Overview</figcaption></figure><figure><img src="HR%20Attrition%20deep-dive%20page.jpg" alt="Page 2: Job Role Deep-Dive" loading="lazy"><figcaption>Page 2: Job Role Deep-Dive</figcaption></figure></div>
+</section>
+
+<section>
+  <h2>Key findings</h2>
+  <div class="cards">
+    <div class="card"><h3><span class="num">1</span>Early tenure is the riskiest</h3><p>Attrition is highest during the first 1–2 years of employment and falls as tenure grows.</p></div>
+    <div class="card"><h3><span class="num">2</span>Retention improves with tenure</h3><p>Employees with longer service leave far less often, so the first years are the critical window.</p></div>
+    <div class="card"><h3><span class="num">3</span>Overtime stands out</h3><p><strong>30.53%</strong> of employees working overtime left, compared with <strong>10.44%</strong> of those who don’t, about 2.9 times higher.</p></div>
+    <div class="card"><h3><span class="num">4</span>Lower income, higher attrition</h3><p>Attrition is highest in the lowest income group and decreases as income rises.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Recommendations</h2>
+  <ul>
+    <li><strong>Review overtime workloads,</strong> especially in the job roles and departments with the highest attrition.</li>
+    <li><strong>Strengthen onboarding and support in the first two years,</strong> for example mentoring and regular check-ins.</li>
+    <li><strong>Review pay competitiveness</strong> for the lowest income group.</li>
+  </ul>
+  <p class="note" style="margin-top:16px">These patterns show association, not proven cause. They tell HR where to look first, and they should be tested with further analysis such as exit interviews or statistical testing.</p>
+</section>
+
+<section>
+  <h2>How I built it</h2>
+  <ul>
+    <li><strong>Data preparation:</strong> cleaned the raw HR dataset and created a cleaned table for reporting.</li>
+    <li><strong>Calculated columns:</strong> age groups, tenure groups, salary groups and a risk level to make patterns easy to compare.</li>
+    <li><strong>DAX measures:</strong> attrition rate, retention rate, turnover rate, headcount and early turnover.</li>
+    <li><strong>Interactivity:</strong> department and job role slicers, plus drillthrough from the overview to a job role deep-dive page.</li>
+    <li><strong>Design:</strong> a consistent colour palette, KPI cards on top and a short key findings panel for quick reading.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Limitations and next steps</h2>
+  <ul>
+    <li>Some groups are small (for example, Human Resources has only 63 employees), so their rates should be read with care.</li>
+    <li>The data is a snapshot, so it cannot show how attrition changes over time.</li>
+    <li>Next: repeat the analysis in SQL and test whether the overtime and income differences are statistically significant.</li>
+  </ul>
+</section>
+
+<footer>
+  <strong>Your Name</strong> · Aspiring HR / Data Analyst · Baku, Azerbaijan<br>
+  LinkedIn: your-link · GitHub: your-link · Email: your-email
+</footer>
+</div>
+<div data-l="az">
+<header class="hero">
+  <div class="eyebrow">Power BI · HR Analitikası · Case Study</div>
+  <h1>İşçilər niyə işdən çıxır? HR Attrition Dashboard</h1>
+  <p class="lead">İki səhifəli interaktiv Power BI hesabatı: attrition harada ən yüksəkdir, kim daha çox risk altındadır və HR nə edə bilər.</p>
+  <div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Data Cleaning</span><span class="tag">Data Storytelling</span></div>
+</header>
+
+<section>
+  <h2>Qısa baxış</h2>
+  <div class="kpis">
+    <div class="kpi"><b>1,470</b><span>Analiz olunan işçi</span></div>
+    <div class="kpi"><b>237</b><span>İşdən çıxan işçi</span></div>
+    <div class="kpi"><b>16.12%</b><span>Ümumi attrition rate</span></div>
+    <div class="kpi"><b>2.9×</b><span>Overtime ilə daha yüksək attrition</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Biznes sualı</h2>
+  <p>İşçi itkisi bahalıdır: işə qəbul, adaptasiya və itirilən təcrübə xərcləri toplanır. Bu layihənin məqsədi HR komandası üçün üç suala cavab tapmaq idi: <strong>Attrition harada cəmlənib? Hansı amillər işdən çıxma ilə bir yerdə görünür? HR ilk növbədə harada addım atmalıdır?</strong></p>
+</section>
+
+<section>
+  <h2>Dashboard önizləməsi</h2>
+  <div class="shots"><figure><img src="HR%20Attrition%20Executive%20page.jpg" alt="Page 1: Ümumi baxış" loading="lazy"><figcaption>Page 1: Ümumi baxış</figcaption></figure><figure><img src="HR%20Attrition%20deep-dive%20page.jpg" alt="Page 2: Job Role Deep-Dive" loading="lazy"><figcaption>Page 2: Job Role Deep-Dive</figcaption></figure></div>
+</section>
+
+<section>
+  <h2>Əsas tapıntılar</h2>
+  <div class="cards">
+    <div class="card"><h3><span class="num">1</span>Ən riskli dövr ilk illərdir</h3><p>Attrition işə qəbuldan sonrakı ilk 1–2 ildə ən yüksəkdir və staj artdıqca azalır.</p></div>
+    <div class="card"><h3><span class="num">2</span>Staj artdıqca bağlılıq güclənir</h3><p>Stajı uzun olan işçilər xeyli az çıxır. Deməli, ilk illər həlledici dövrdür.</p></div>
+    <div class="card"><h3><span class="num">3</span>Overtime fərqi nəzərə çarpır</h3><p>Overtime işləyənlərin <strong>30.53%-i</strong> işdən çıxıb, işləməyənlərdə isə bu göstərici <strong>10.44%</strong>-dir, yəni təxminən 2.9 dəfə yüksəkdir.</p></div>
+    <div class="card"><h3><span class="num">4</span>Gəlir aşağıdırsa, attrition yüksəkdir</h3><p>Attrition ən aşağı gəlir qrupunda ən yüksəkdir və gəlir artdıqca azalır.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Tövsiyələr</h2>
+  <ul>
+    <li><strong>Overtime yükünü yenidən nəzərdən keçirmək,</strong> xüsusilə attrition ən yüksək olan vəzifə və departamentlərdə.</li>
+    <li><strong>İlk iki ildə adaptasiya və dəstəyi gücləndirmək,</strong> məsələn mentorluq və müntəzəm görüşlər.</li>
+    <li><strong>Ən aşağı gəlir qrupunda maaşın rəqabətə davamlılığını yoxlamaq.</strong></li>
+  </ul>
+  <p class="note" style="margin-top:16px">Bu nəticələr əlaqəni göstərir, səbəbi isə sübut etmir. Onlar HR-a hara baxmalı olduğunu göstərir və exit interview və ya statistik test kimi əlavə analizlə yoxlanmalıdır.</p>
+</section>
+
+<section>
+  <h2>Necə qurulub</h2>
+  <ul>
+    <li><strong>Data hazırlığı:</strong> xam HR datası təmizlənib və hesabat üçün ayrıca təmiz cədvəl yaradılıb.</li>
+    <li><strong>Calculated column-lar:</strong> yaş qrupu, staj qrupu, gəlir qrupu və risk səviyyəsi, ki, qruplar asan müqayisə olunsun.</li>
+    <li><strong>DAX measure-lar:</strong> attrition rate, retention rate, turnover rate, headcount və early turnover.</li>
+    <li><strong>İnteraktivlik:</strong> department və job role slicer-ləri, həmçinin ümumi səhifədən job role deep-dive səhifəsinə drillthrough.</li>
+    <li><strong>Dizayn:</strong> vahid rəng palitrası, yuxarıda KPI kartları və tez oxumaq üçün qısa key findings paneli.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Məhdudiyyətlər və növbəti addımlar</h2>
+  <ul>
+    <li>Bəzi qruplar kiçikdir (məsələn, Human Resources-də cəmi 63 işçi var), ona görə onların rate-lərini ehtiyatla oxumaq lazımdır.</li>
+    <li>Data bir andakı vəziyyəti göstərir, ona görə attrition-un zamanla necə dəyişdiyini göstərmir.</li>
+    <li>Növbəti addım: eyni analizi SQL-də təkrarlamaq və overtime və gəlir fərqlərinin statistik əhəmiyyətini yoxlamaq.</li>
+  </ul>
+</section>
+
+<footer>
+  <strong>Adınız Soyadınız</strong> · HR / Data Analitik namizədi · Bakı, Azərbaycan<br>
+  LinkedIn: linkiniz · GitHub: linkiniz · Email: emailiniz
+</footer>
+</div>
+</main>
+<script>
+(function(){
+  var b=document.body,en=document.getElementById("b-en"),az=document.getElementById("b-az");
+  function set(l){b.setAttribute("data-lang",l);document.documentElement.lang=l;
+    en.setAttribute("aria-pressed",l==="en");az.setAttribute("aria-pressed",l==="az");}
+  en.onclick=function(){set("en")};az.onclick=function(){set("az")};
+})();
+</script>
+</body>
+</html>
